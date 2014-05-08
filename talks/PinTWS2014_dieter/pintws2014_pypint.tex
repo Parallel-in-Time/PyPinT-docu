@@ -1,0 +1,137 @@
+\documentclass[%
+  english,
+  hyperref={pdfpagelabels=false},
+  aspectratio=1610]{beamer}
+
+\usepackage{lmodern}  % nicer fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\mode<handout>{
+  \usepackage{pgf}
+  \usepackage{pgfpages}
+  \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+}
+\mode<presentation>{
+  \usetheme{Juelich}
+}
+
+\usepackage[english]{babel}
+\usepackage[scaled]{helvet}
+\usepackage{graphics}
+
+\usepackage{listings}  % for source code display
+
+\usepackage{hyperref}
+
+\title{PyPinT}
+\subtitle{Towards a framework for rapid prototyping of iterative parallel-in-time algorithms}
+\author{Dieter Moser, Torbjörn Klatt, Dr. Robert Speck
+  <\href{mailto:d.moser@fz-juelich.de}{\{d.moser,t.klatt,r.speck\}@fz-juelich.de}>%
+}
+\institute{3rd Workshop on Parallel-in-Time Integration Methods}
+\date{May 28, 2014}
+\setbeamertemplate{slide counter}[showall]
+
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+  \frametitle{Overview}
+  \begin{enumerate}
+    \item Recap of existing Parallel-in-Time Algorithms
+    \item The \emph{PyPinT} Framework Explained
+    \item Goals
+    \item Proof of Concept --- Examples Analyzed
+  \end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Existing Parallel-in-Time Approaches}
+\makepart
+
+\begin{frame}
+  \frametitle{Parareal}
+\end{frame}
+
+\begin{frame}
+  \frametitle{RIDC}
+\end{frame}
+
+\begin{frame}
+  \frametitle{PFASST}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{The PyPinT Framework Explained}
+\makepart
+
+\begin{frame}
+  \frametitle{Basic Concept}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modules}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Goals}
+\makepart
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Proof of Concept}
+\makepart
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{~}
+  \begin{center}
+    {\huge Thank you for your attention!}\par
+    \bigskip
+    \bigskip
+    \bigskip
+    {\Large Questions?}\par
+    {\scriptsize\color{fzjgray50}(now or later)}\par
+    \bigskip
+    {\scriptsize \emph{PyPinT} is on \includegraphics[height=1em]{GitHub-Mark-32px.png}~GitHub: \url{https://github.com/Parallel-in-Time/PyPinT}}
+    \bigskip
+    \begin{columns}
+      \tiny
+      \begin{column}{0.09\textwidth}
+      \end{column}
+      \begin{column}{0.3\textwidth}
+        Dieter Moser\\
+        Juelich Supercomputing Centre\\
+        Building 16.3, Room 022\\
+        Tel: +49~2461~61~96453\\
+        eMail: \href{mailto:d.moser@fz-juelich.de}{d.moser@fz-juelich.de}
+      \end{column}
+      \begin{column}{0.3\textwidth}
+        Torbjörn Klatt\\
+        Juelich Supercomputing Centre\\
+        Building 16.3, Room 022\\
+        Tel: +49~2461~61~96452\\
+        eMail: \href{mailto:t.klatt@fz-juelich.de}{t.klatt@fz-juelich.de}
+      \end{column}
+      \begin{column}{0.3\textwidth}
+        Dr. Robert Speck~*\\
+        Juelich Supercomputing Centre\\
+        Building 16.3, Room 131\\
+        Tel: +49~2461~61~1644\\
+        eMail: \href{mailto:r.speck@fz-juelich.de}{r.speck@fz-juelich.de}
+      \end{column}
+      \begin{column}{0.01\textwidth}
+      \end{column}
+    \end{columns}
+  \end{center}
+  \vfill
+  {\tiny * corresponding author}
+\end{frame}
+
+\end{document}
