@@ -60,8 +60,8 @@
     \begin{column}{4cm}
       \begin{itemize}
 	\item coarse $\mathcal{\textcolor{blue}{G}}$ and fine $\mathcal{\textcolor{red}{F}}$ propagators make parareal
-	  flexible and \textcolor{orange}{modular}
-	\item an initial value is improved \textcolor{orange}{iteratively}
+	  flexible and \textcolor{fzjblue30}{modular}
+	\item an initial value is improved \textcolor{fzjyellow}{iteratively}
 	\item order is controllable through the fine propagator $\mathcal{\textcolor{red}{F}}$ 
       \end{itemize}
     \end{column}
@@ -79,20 +79,18 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{IDC and DC}
-
+  \frametitle{Integral Deferred Corrections}
+  \framesubtitle{Reference}
   \begin{columns}[T]
-    \begin{column}{6cm}
-    \begin{align*}
-      y'(t) = f\left( y\left( t \right),t \right),\quad y\left( 0 \right)= y_{0}
-    \end{align*}
+    \begin{column}{7cm}
+      $ y'(t) = f\left( t, y\left( t \right) \right),\quad y\left( 0 \right)= y_{0} $\\[1.5em]
     Using the residual
-    \begin{align*}
-	r(t) &= f\left( t, \tilde y\left( t \right) \right) - \tilde y\left( t \right)
-      \end{align*}
+\\[1em]
+	$r(t) = f\left( t, \tilde y\left( t \right) \right) - \tilde y'\left( t \right)$
+\\[1em]
     to compute the error
     \begin{align*}
-	e'(t) &= f(t,\tilde u + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
+	e'(t) &= f(t,\tilde y + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
 	e(0)  &= 0
     \end{align*}
     for the next update
@@ -102,26 +100,18 @@
     
 
     \end{column}
-    \begin{column}{6cm}
-    
-     \begin{align*}
-      y'(t) = f\left( y\left( t \right),t \right),\quad y\left( 0 \right)= y_{0}
-    \end{align*}
-    Using the residual
-    \begin{align*}
-	r(t) &= f\left( t, \tilde y\left( t \right) \right) - \tilde y\left( t \right)
-      \end{align*}
+    \begin{column}{7cm} 
+      $   y(t) = y_0 + \int_{0}^{t}  f\left( \tau, y\left( \tau \right) \right) \mathrm{d}\tau, \quad y\left( 0 \right)= y_{0} $ \\[1.5em]
+      Using the residual\\[1em]
+      $r(t) = y_{0} - \tilde y\left( t \right) + \int_{0}^{t} f\left(\tau, y\left( \tau \right) \right)  \mathrm{d}\tau $\\[1em]
     to compute the error
     \begin{align*}
-	e'(t) &= f(t,\tilde u + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
-	e(0)  &= 0
-    \end{align*}
+      e(t) = \int_{0}^{t}f(\tau,\tilde y + e) - f\left( \tau, \tilde y \right) \mathrm{d}\tau + r\left( t \right)
+    \end{align*}\\[0.5em]
     for the next update
     \begin{align*}
       \tilde y_{j+1} = \tilde y_{j} + e_{j}
     \end{align*}
-    
-
 
 
   \end{column}
@@ -131,12 +121,42 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{RIDC}
+  \frametitle{Revisionist IDC }
+  \framesubtitle{Reference}
+\center One equation
+\begin{align*}
+  u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) 
+\end{align*}
+\center different strategies of computation\\[1.5em]
+\includegraphics[width=12cm]{src/ridc_time_domain}\\
+    What is needed? \textcolor{fzjyellow}{Integrator},  \textcolor{fzjyellow}{Evaluation of $F$}
+
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{RIDC}
+  \frametitle{Multilevel SDC}
+  \framesubtitle{Reference}
+\center One equation
+\begin{align*}
+  u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) + \textcolor{fzjblue30}{\tau_{n}^{k}}
+\end{align*}
+\center different strategies of computation\\[1.5em]
+\begin{columns}[T]
+  \begin{column}{3cm}
+        What is needed? 
+	\begin{itemize}
+	  \item \textcolor{fzjyellow}{Integrator}
+	  \item \textcolor{fzjyellow}{Evaluation of $F$}
+	  \item \textcolor{fzjyellow}{Interpolation}
+	  \item \textcolor{fzjyellow}{Restriction}
+	\end{itemize}
+  \end{column}
+  \begin{column}{7cm}
+	\includegraphics[width=6cm]{src/mlsdc_time_domain}
+  \end{column}
+\end{columns}
+
+
 \end{frame}
 
 
