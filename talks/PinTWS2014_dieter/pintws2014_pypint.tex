@@ -52,13 +52,93 @@
 \part{Existing Parallel-in-Time Approaches}
 \makepart
 
+
 \begin{frame}
   \frametitle{Parareal}
+  \framesubtitle{\scriptsize\normalfont Reference}
+  \begin{columns}[T]
+    \begin{column}{4cm}
+      \begin{itemize}
+	\item coarse $\mathcal{\textcolor{blue}{G}}$ and fine $\mathcal{\textcolor{red}{F}}$ propagators make parareal
+	  flexible and \textcolor{orange}{modular}
+	\item an initial value is improved \textcolor{orange}{iteratively}
+	\item order is controllable through the fine propagator $\mathcal{\textcolor{red}{F}}$ 
+      \end{itemize}
+    \end{column}
+    \begin{column}{8cm}
+      \includegraphics[width=8cm]{src/parareal_overview}
+
+      \vspace*{-0.2cm} \hfill {\tiny [Courtesy of M.~Emmett, LBNL]}\\[0.1cm]
+
+  \end{column}
+\end{columns}
+              \begin{align*}
+                  \textcolor{orange}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
+              \end{align*}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{IDC and DC}
+
+  \begin{columns}[T]
+    \begin{column}{6cm}
+    \begin{align*}
+      y'(t) = f\left( y\left( t \right),t \right),\quad y\left( 0 \right)= y_{0}
+    \end{align*}
+    Using the residual
+    \begin{align*}
+	r(t) &= f\left( t, \tilde y\left( t \right) \right) - \tilde y\left( t \right)
+      \end{align*}
+    to compute the error
+    \begin{align*}
+	e'(t) &= f(t,\tilde u + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
+	e(0)  &= 0
+    \end{align*}
+    for the next update
+    \begin{align*}
+      \tilde y_{j+1} = \tilde y_{j} + e_{j}
+    \end{align*}
+    
+
+    \end{column}
+    \begin{column}{6cm}
+    
+     \begin{align*}
+      y'(t) = f\left( y\left( t \right),t \right),\quad y\left( 0 \right)= y_{0}
+    \end{align*}
+    Using the residual
+    \begin{align*}
+	r(t) &= f\left( t, \tilde y\left( t \right) \right) - \tilde y\left( t \right)
+      \end{align*}
+    to compute the error
+    \begin{align*}
+	e'(t) &= f(t,\tilde u + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
+	e(0)  &= 0
+    \end{align*}
+    for the next update
+    \begin{align*}
+      \tilde y_{j+1} = \tilde y_{j} + e_{j}
+    \end{align*}
+    
+
+
+
+  \end{column}
+\end{columns}
+
+
 \end{frame}
 
 \begin{frame}
   \frametitle{RIDC}
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{RIDC}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{PFASST}
