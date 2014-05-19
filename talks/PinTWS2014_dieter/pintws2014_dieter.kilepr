@@ -40,16 +40,16 @@ order=-1
 
 [item:pintws2014_pypint.tex]
 archive=true
-column=127
+column=17
 encoding=UTF-8
 highlight=LaTeX
-line=132
+line=99
 mode=LaTeX
 open=true
 order=0
 
 [view-settings,view=0,item:pintws2014_pypint.tex]
-CursorColumn=127
-CursorLine=132
+CursorColumn=17
+CursorLine=99
 JumpList=
-ViMarks=.,54,0,[,54,0,],54,0
+ViMarks=.,97,25,[,97,0,],97,25

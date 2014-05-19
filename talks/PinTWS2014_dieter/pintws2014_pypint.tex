@@ -72,7 +72,7 @@
 \begin{frame}
   \frametitle{Basic Concept}
   \begin{itemize}
-    \item \emph{Python} as language of choice\\
+    \item \emph{Python} {\color{fzjgray50}\scriptsize $\geq$3.2} as language of choice\\
       {\scriptsize for ease of use and extensibility (cf. \emph{NumPy}, \emph{SciPy})}
     \item well-conceived and intuitive abstract interfaces\\
       {\scriptsize for reusable code ensuring DRY principle}
@@ -95,17 +95,65 @@
 
 \begin{frame}
   \frametitle{Modules}
-  \framesubtitle{Overview}
+  \framesubtitle{Abstract Modeling of PinT Algorithms}
   
-  \begin{itemize}
-    \item \texttt{pypint.communicators}
-    \item \texttt{pypint.integrators}
-    \item \texttt{pypint.multi\_level\_providers}
-    \item \texttt{pypint.plugins}
-    \item \texttt{pypint.problems}
-    \item \texttt{pypint.solvers}
-    \item \texttt{pypint.solutions}
-  \end{itemize}
+  \begin{columns}[T]
+    \begin{column}{5cm}
+      \color{fzjblue50}%
+      \texttt{pypint}\\
+      \color{fzjblue50}%
+      \hspace{0.75em}\texttt{\textasciitilde.problems}\\
+      \color{fzjgray30}%
+      \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.plugins}\\
+      \hspace{0.75em}\texttt{\textasciitilde.solutions}
+    \end{column}
+    \begin{column}{9cm}
+      \begin{itemize}
+        \item interfaces for problem setups
+        \item generic problem with specializations via mixins
+      \end{itemize}
+      
+      \begin{picture}(1,1)
+        \put(15,-100){\includegraphics[width=7.5cm]{src/problem_interfaces.pdf}}
+      \end{picture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modules}
+  \framesubtitle{Abstract Modeling of PinT Algorithms}
+  
+  \begin{columns}[T]
+    \begin{column}{5cm}
+      \color{fzjblue50}%
+      \texttt{pypint}\\
+      \color{fzjgray30}%
+      \hspace{0.75em}\texttt{\textasciitilde.problems}\\
+      \color{fzjblue50}%
+      \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
+      \color{fzjgray30}%
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.plugins}\\
+      \hspace{0.75em}\texttt{\textasciitilde.solutions}
+    \end{column}
+    \begin{column}{9cm}
+      \begin{itemize}
+        \item interfaces for iterative time solvers
+        \item providing generic building blocks of solvers
+      \end{itemize}
+      
+      \begin{picture}(1,1)
+        \put(25,-90){\includegraphics[height=3.5cm]{src/solvers_interfaces.pdf}}
+      \end{picture}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 
