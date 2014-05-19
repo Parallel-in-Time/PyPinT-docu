@@ -458,6 +458,35 @@
 \part{Proof of Concept}
 \makepart
 
+\begin{frame}
+  \frametitle{Implementation of SDC and MLSDC}
+  \framesubtitle{Stability Regions of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1]$}
+  \begin{columns}[T]
+    \begin{column}{7cm}
+      \vspace{-7.75em}
+      \centering
+      {\color{fzjblue50}SDC}
+      \begin{picture}(1,1)
+        \put(-50,-88){\includegraphics[height=3cm]{src/sdc_p3.png}}
+        \put(-35,-95){\tiny $3$ Gauss-Lobatto nodes}
+        \put(-50,-188){\includegraphics[height=3cm]{src/sdc_p5.png}}
+        \put(-35,-195){\tiny $5$ Gauss-Lobatto nodes}
+      \end{picture}
+    \end{column}
+    \begin{column}{7cm}
+      \vspace{-7.75em}
+      \centering
+      {\color{fzjblue50}MLSDC}
+      \begin{picture}(1,1)
+        \put(-65,-88){\includegraphics[height=3cm]{src/mlsdc_p3.png}}
+        \put(-50,-95){\tiny $3$ Gauss-Lobatto nodes}
+        \put(-65,-188){\includegraphics[height=3cm]{src/mlsdc_p5.png}}
+        \put(-50,-195){\tiny $5$ Gauss-Lobatto nodes}
+      \end{picture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
