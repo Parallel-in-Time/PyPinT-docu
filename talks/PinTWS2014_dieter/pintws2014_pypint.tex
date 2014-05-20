@@ -484,17 +484,17 @@
 
 \begin{frame}
   \frametitle{Implementation of SDC and MLSDC}
-  \framesubtitle{Stability Regions {\tiny\normalfont(number iterations)} of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1]$}
+  \framesubtitle{\normalfont Convergence Regions {\tiny\color{fzjgray50}(number iterations)} of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1], \lambda\in\mathrm{C}$}
   \begin{columns}[T]
     \begin{column}{7cm}
       \vspace{-7.75em}
       \centering
       {\color{fzjblue50}SDC}
       \begin{picture}(1,1)
-        \put(-70,-88){\includegraphics[height=3cm]{src/sdc_n3.png}}
-        \put(-40,-93){\tiny $3$ Gauss-Lobatto nodes}
-        \put(-70,-188){\includegraphics[height=3cm]{src/sdc_n5.png}}
-        \put(-40,-193){\tiny $5$ Gauss-Lobatto nodes}
+        \put(-70,-88){\includegraphics[height=3cm]{src/sdc_n5.png}}
+        \put(-40,-90){\tiny $5$ Gauss-Lobatto nodes}
+        \put(-70,-185){\includegraphics[height=3cm]{src/sdc_n7.png}}
+        \put(-40,-190){\tiny $7$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
     \begin{column}{7cm}
@@ -502,10 +502,12 @@
       \centering
       {\color{fzjblue50}MLSDC}
       \begin{picture}(1,1)
-%         \put(-65,-88){\includegraphics[height=3cm]{src/mlsdc_n3.png}}
-        \put(-70,-95){\tiny two levels with $3$ and $5$ Gauss-Lobatto nodes}
-%         \put(-65,-188){\includegraphics[height=3cm]{src/mlsdc_n5.png}}
-        \put(-70,-195){\tiny two levels with $5$ and $7$ Gauss-Lobatto nodes}
+        \put(-80,-88){\includegraphics[height=3cm]{src/mlsdc_n03_n15.png}}
+        \put(-50,-50){\color{red}\textbf{BROKEN}}
+        \put(-75,-90){\tiny two levels with $3$ and $5$ Gauss-Lobatto nodes}
+        \put(-80,-185){\includegraphics[height=3cm]{src/mlsdc_n04_n17.png}}
+        \put(-50,-150){\color{red}\textbf{BROKEN}}
+        \put(-75,-190){\tiny two levels with $4$ and $7$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
   \end{columns}
@@ -556,6 +558,9 @@
   \end{center}
   \vfill
   {\tiny * corresponding author}
+  \begin{picture}(1,1)
+    \put(-85,200){\includegraphics[width=3cm]{src/pint_logo.png}}
+  \end{picture}
 \end{frame}
 
 \end{document}
