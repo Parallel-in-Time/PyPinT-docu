@@ -24,8 +24,8 @@
 
 \lstdefinelanguage{Python}{%
   morekeywords=[1]{complex,LambdaU,ForwardSendingMessaging,Sdc,QuadratureBase,GaussLobatto,Polynomial,SemiImplicitSdc},
-  morekeywords=[2]{comm,problem,solver,quadr,solution},
-%   morekeywords=[3]{communicator,nodes,weight,integrator},
+  morekeywords=[2]{comm,prob,solver,quadr,integr,solution},
+  morekeywords=[3]{communicator,nodes,weights,num_nodes,coeffs,integrator,problem,quadrature},
   sensitive=true,
   morecomment=[l]\#,
   morecomment=[l]\>,
@@ -35,13 +35,16 @@
   language=Python,
   basicstyle=\scriptsize\ttfamily,
   commentstyle=\color{fzjgray80},
-  keywordstyle=[1]\color{fzjgreen},
-  keywordstyle=[2]\color{fzjblue},
-%   keywordstyle=[3]\color{fzjlightyellow},
+  keywordstyle=[1]\color{fzjblue50},
+  keywordstyle=[2]\color{fzjgreen},
+  keywordstyle=[3]\color{fzjred},
   stringstyle=\color{fzjred},
   inputencoding=utf8,
   showspaces=false,
-  showstringspaces=false
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{fzjgray80}\ttfamily,
+  lineskip=0.5em
 }
 
 \usepackage{hyperref}
@@ -585,18 +588,34 @@
   \frametitle{Implementation of SDC and MLSDC}
   \framesubtitle{Python Script for a SDC run with 3 Gauss-Lobatto nodes}
   \begin{lstlisting}[language=Python]
-problem = LambdaU(complex(-1.0, 1.0))
-
+prob = LambdaU(complex(-1.0, 1.0))
 comm = ForwardSendingMessaging()
 solver = Sdc(communicator=comm)
-
-quadr = QuadratureBase(nodes=GaussLobatto(3), weight=Polynomial(1))
-
-solver.init(quadr, problem)
-
-solution = solver.run(integrator=SemiImplicitSdc)
+solver.init(problem=prob)
+quadr = QuadratureBase(nodes=GaussLobatto(num_nodes=3),
+                       weights=Polynomial(coeffs=[1]))
+integr = SemiImplicitSdc(quadrature=quadr)
+solution = solver.run(integrator=integr)
+# plotting via matplotlib.pyplt
   \end{lstlisting}
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{Advantages of \emph{PyPinT}}
+  \framesubtitle{\normalfont``towards'' \dots}
+  
+  \begin{itemize}
+    \item use of Python's full feature set
+      \begin{itemize}
+        \item easy parallelism\\
+          {\scriptsize via Python's own (e.g. \texttt{multiprocessing}) or 3rd-party modules (e.g. \texttt{mpi4py})}
+	\item built-in portability\\
+	  {\scriptsize runs on Unix and MacOS (should run on Windows too)}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
