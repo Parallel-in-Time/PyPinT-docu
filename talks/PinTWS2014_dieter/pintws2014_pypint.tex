@@ -75,120 +75,108 @@
 
 \begin{frame}
   \frametitle{Parareal}
-  \framesubtitle{\scriptsize\normalfont  Y. Maday, \emph{The parareal in time algorithm}, pp. 1–24, 2008.}
+  \framesubtitle{\scriptsize\normalfont Y. Maday, \emph{The parareal in time algorithm}, pp. 1–24, 2008.}
   \begin{columns}[T]
     \begin{column}{4cm}
       \begin{itemize}
-	\item coarse $\mathcal{\textcolor{blue}{G}}$ and fine $\mathcal{\textcolor{red}{F}}$ propagators make parareal
-	  flexible and \textcolor{fzjblue30}{modular}
-	\item an initial value is improved \textcolor{fzjyellow}{iteratively}
-	\item order is controllable through the fine propagator $\mathcal{\textcolor{red}{F}}$ 
+        \item coarse $\mathcal{\textcolor{blue}{G}}$ and fine $\mathcal{\textcolor{red}{F}}$ propagators make parareal flexible and \textcolor{fzjblue30}{modular}
+        \item an initial value is improved \textcolor{fzjyellow}{iteratively}
+        \item order is controllable through the fine propagator $\mathcal{\textcolor{red}{F}}$ 
       \end{itemize}
     \end{column}
     \begin{column}{8cm}
       \includegraphics[width=8cm]{src/parareal_overview}
-
       \vspace*{-0.2cm} \hfill {\tiny [Courtesy of M.~Emmett, LBNL]}\\[0.1cm]
-
-  \end{column}
-\end{columns}
-              \begin{align*}
-                  \textcolor{fzjyellow}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
-              \end{align*}
-    What is needed? \textcolor{fzjyellow}{Two Integrators}
-
+    \end{column}
+  \end{columns}
+  \begin{align*}
+      \textcolor{fzjyellow}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
+  \end{align*}
+  What is needed? \textcolor{fzjyellow}{Two Integrators}
 \end{frame}
 
 \begin{frame}
   \frametitle{Deferred Corrections \hspace{2em} \onslide<2>{ and \hspace{2em}  Integral Deferred Corrections}}
-
- \framesubtitle{\scriptsize\normalfont  \alt<1>{ V. Pereyra, “On improving an approximate solution of a functional equation by deferred corrections,” Numer. Math., vol. 391, no. 044, pp. 376–391, 1966.}
-  					{ A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}}
+  \framesubtitle{
+    \scriptsize\normalfont
+    \alt<1>{V. Pereyra, “On improving an approximate solution of a functional equation by deferred corrections,” Numer. Math., vol. 391, no. 044, pp. 376–391, 1966.}
+           {A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}%
+  }
   \begin{columns}[T]
     \begin{column}{7cm}
       $ y'(t) = f\left( t, y\left( t \right) \right),\quad y\left( 0 \right)= y_{0} $\\[1.5em]
-    Using the residual
-\\[1em]
-	$r(t) = f\left( t, \tilde y\left( t \right) \right) - \tilde y'\left( t \right)$
-\\[1em]
-    to compute the error
-    \begin{align*}
-	e'(t) &= f(t,\tilde y + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
-	e(0)  &= 0
-    \end{align*}
-    for the next update
-    \begin{align*}
-      \tilde y_{j+1} = \tilde y_{j} + e_{j}
-    \end{align*}
-    
-
+      Using the residual\\[1em]
+      $r(t) = f\left( t, \tilde y\left( t \right) \right) - \tilde y'\left( t \right)$\\[1em]
+      to compute the error
+      \begin{align*}
+        e'(t) &= f(t,\tilde y + e) - f\left( t, \tilde y \right) + r'\left( t \right)\\
+        e(0)  &= 0
+      \end{align*}
+      for the next update
+      \begin{align*}
+        \tilde y_{j+1} = \tilde y_{j} + e_{j}
+      \end{align*}
     \end{column}
     \begin{column}{7cm}
 
       \onslide<2>{
-      $   y(t) = y_0 + \int_{0}^{t}  f\left( \tau, y\left( \tau \right) \right) \mathrm{d}\tau, \quad y\left( 0 \right)= y_{0} $ \\[1.5em]
-      Using the residual\\[1em]
-      $r(t) = y_{0} - \tilde y\left( t \right) + \int_{0}^{t} f\left(\tau, y\left( \tau \right) \right)  \mathrm{d}\tau $\\[1em]
-    to compute the error
-    \begin{align*}
-      e(t) = \int_{0}^{t}f(\tau,\tilde y + e) - f\left( \tau, \tilde y \right) \mathrm{d}\tau + r\left( t \right)
-    \end{align*}\\[0.5em]
-    for the next update
-    \begin{align*}
-      \tilde y_{j+1} = \tilde y_{j} + e_{j}
-    \end{align*}
-	}
-
-  \end{column}
-\end{columns}
-
-
+        $   y(t) = y_0 + \int_{0}^{t}  f\left( \tau, y\left( \tau \right) \right) \mathrm{d}\tau, \quad y\left( 0 \right)= y_{0} $ \\[1.5em]
+        Using the residual\\[1em]
+        $r(t) = y_{0} - \tilde y\left( t \right) + \int_{0}^{t} f\left(\tau, y\left( \tau \right) \right)  \mathrm{d}\tau $\\[1em]
+        to compute the error
+        \begin{align*}
+          e(t) = \int_{0}^{t}f(\tau,\tilde y + e) - f\left( \tau, \tilde y \right) \mathrm{d}\tau + r\left( t \right)
+        \end{align*}\\[0.5em]
+        for the next update
+        \begin{align*}
+          \tilde y_{j+1} = \tilde y_{j} + e_{j}
+        \end{align*}
+      }
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{ Spectral Deferred Corrections }
-  \framesubtitle{\scriptsize\normalfont A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}
+  \framesubtitle{
+    \scriptsize\normalfont A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}
   \begin{center}
- \includegraphics[width=6cm]{src/sdc_time_domain} 
+    \includegraphics[width=6cm]{src/sdc_time_domain} 
   \end{center}
 
-One sweep is performed by
-\begin{align*}
-  u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) 
-\end{align*}
-new main constituent is the quadrature operator
-\begin{align*}
-  \mathcal{I}_{n}^{n+1} \mathbf{y} = \sum_{i=1}^{m} \omega_{i} \tilde y_i \approx \int_{t_n}^{t_{n+1}} y\left( \tau \right) \mathrm{d} \tau
-\end{align*}
+  One sweep is performed by
+  \begin{align*}
+    u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) 
+  \end{align*}
+  new main constituent is the quadrature operator
+  \begin{align*}
+    \mathcal{I}_{n}^{n+1} \mathbf{y} = \sum_{i=1}^{m} \omega_{i} \tilde y_i \approx \int_{t_n}^{t_{n+1}} y\left( \tau \right) \mathrm{d} \tau
+  \end{align*}
 
-What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evaluation of $F$} (, \color{fzjyellow}{Space Solver}) $\longrightarrow$ \textcolor{fzjyellow}{new Integrator}
-
+  What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evaluation of $F$} (, \textcolor{fzjyellow}{Space Solver}) $\longrightarrow$ \textcolor{fzjyellow}{new Integrator}
 \end{frame}
 
 \begin{frame}
   \frametitle{Multilevel SDC}
   \framesubtitle{\scriptsize\normalfont R. Speck, D. Ruprecht, and M. Emmett, “A multi-level spectral deferred correction method,” arXiv Prepr. arXiv …, 2013.}
-\center Slightly different sweep
-\begin{align*}
-  u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) + \textcolor{fzjblue30}{\tau_{n}^{k}}
-\end{align*}
-\center and multiple level, correction $\textcolor{fzjblue30}{\tau_{n}^{k}}$ based on information from different levels
-\\[1.5em]
-\begin{columns}[T]
-  \begin{column}{3cm}
-        What is needed? 
-	\begin{itemize}
-	  \item same as SDC
-	  \item \textcolor{fzjyellow}{Interpolation} (space and time)
-	  \item \textcolor{fzjyellow}{Restriction} (space and time)
-	\end{itemize}
-  \end{column}
-  \begin{column}{7cm}
-	\includegraphics[width=6cm]{src/mlsdc_time_domain}
-  \end{column}
-\end{columns}
-
-
+  \center Slightly different sweep
+  \begin{align*}
+    u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) + \textcolor{fzjblue30}{\tau_{n}^{k}}
+  \end{align*}
+  \center and multiple level, correction $\textcolor{fzjblue30}{\tau_{n}^{k}}$ based on information from different levels\\[1.5em]
+  \begin{columns}[T]
+    \begin{column}{5cm}
+      What is needed? 
+      \begin{itemize}
+        \item same as SDC
+        \item \textcolor{fzjyellow}{Interpolation} {\scriptsize (space and time)}
+        \item \textcolor{fzjyellow}{Restriction} {\scriptsize (space and time)}
+      \end{itemize}
+    \end{column}
+    \begin{column}{7cm}
+      \includegraphics[width=6cm]{src/mlsdc_time_domain}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 
@@ -199,7 +187,6 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
   \begin{picture}(1,1)
     \put(50,-125){\includegraphics[height=9.5cm]{src/pfasst_blocks.pdf}}
   \end{picture}
-
 \end{frame}
 
 
@@ -242,9 +229,10 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -268,9 +256,10 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -300,9 +289,10 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
       \color{fzjgray30}%
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -331,24 +321,24 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
       \color{fzjblue50}%
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
     \begin{column}{10cm}
       \begin{itemize}
-        \item providers of various quadrature nodes and weight functions\\
-          {\scriptsize e.g. Gauss-Lobatto, Gauss-Legendre, polynomial, etc.\\}
-        \item providers aggregated in integrators\\
-          {\scriptsize for intuitive methods:\\
-           \texttt{.q\_matrix.apply(data)} and \texttt{.s\_matrix.apply(data, target\_node)} \\}
+        \item abstract interface for integrators of ODEs\\
+          {\scriptsize e.g. \emph{Runge-Kutta}, \emph{Expl./Impl. Euler}, \emph{SDC} etc.\\}
+        \item unified generic interface for executing integrator\\
+          {\scriptsize via method \texttt{.apply(*args, **kwargs)}}
       \end{itemize}
       
       \begin{picture}(1,1)
-        \put(25,-100){\includegraphics[height=3.75cm]{src/integrators_interfaces.pdf}}
+        \put(25,-90){\includegraphics[height=3.5cm]{src/integrators_interfaces.pdf}}
       \end{picture}
     \end{column}
   \end{columns}
@@ -365,11 +355,12 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -399,11 +390,12 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \color{fzjgray30}%
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -436,9 +428,46 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \color{fzjblue50}%
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \color{fzjgray30}%
+      \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
+      \hspace{0.75em}\texttt{\textasciitilde.plugins}
+    \end{column}
+    \begin{column}{10cm}
+      \begin{itemize}
+        \item providers of various quadrature nodes and weight functions\\
+          {\scriptsize e.g. Gauss-Lobatto, Gauss-Legendre, polynomial, etc.\\}
+        \item providers aggregated in basic quadrature interface\\
+          {\scriptsize for intuitive methods:\\
+           \texttt{.q\_matrix.apply(data)} and \texttt{.s\_matrix.apply(data, target\_node)} \\}
+      \end{itemize}
+      
+      \begin{picture}(1,1)
+        \put(25,-100){\includegraphics[height=3.75cm]{src/quadrature_interfaces.pdf}}
+      \end{picture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modules}
+  \framesubtitle{Abstract Modelling of PinT Algorithms}
+  \vspace{-5em}
+  \begin{columns}[T]
+    \begin{column}{5cm}
+      \color{fzjblue50}%
+      \texttt{pypint}\\
+      \color{fzjgray30}%
+      \hspace{0.75em}\texttt{\textasciitilde.problems}\\
+      \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \color{fzjgray30}%
@@ -470,9 +499,10 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
