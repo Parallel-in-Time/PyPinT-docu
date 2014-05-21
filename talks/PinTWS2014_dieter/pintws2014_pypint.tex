@@ -22,12 +22,22 @@
 
 \usepackage{listings}  % for source code display
 
+\lstdefinelanguage{Python}{%
+  morekeywords=[1]{complex,LambdaU,ForwardSendingMessaging,Sdc,QuadratureBase,GaussLobatto,Polynomial,SemiImplicitSdc},
+  morekeywords=[2]{comm,problem,solver,quadr,solution},
+%   morekeywords=[3]{communicator,nodes,weight,integrator},
+  sensitive=true,
+  morecomment=[l]\#,
+  morecomment=[l]\>,
+  string=[d]\"
+}
 \lstset{
-%   language=zsh,
+  language=Python,
   basicstyle=\scriptsize\ttfamily,
   commentstyle=\color{fzjgray80},
   keywordstyle=[1]\color{fzjgreen},
   keywordstyle=[2]\color{fzjblue},
+%   keywordstyle=[3]\color{fzjlightyellow},
   stringstyle=\color{fzjred},
   inputencoding=utf8,
   showspaces=false,
@@ -85,7 +95,7 @@
               \begin{align*}
                   \textcolor{fzjyellow}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
               \end{align*}
-    What is needed? \textcolor{fzjyellow}{Two Integrators},  \textcolor{fzjyellow}{Evaluation of $F$}
+    What is needed? \textcolor{fzjyellow}{Two Integrators}
 
 \end{frame}
 
@@ -151,7 +161,7 @@ new main constituent is the quadrature operator
   \mathcal{I}_{n}^{n+1} \mathbf{y} = \sum_{i=1}^{m} \omega_{i} \tilde y_i \approx \int_{t_n}^{t_{n+1}} y\left( \tau \right) \mathrm{d} \tau
 \end{align*}
 
-What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evaluation of $F$} $\longrightarrow$ \textcolor{fzjyellow}{new Integrator}
+What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evaluation of $F$} (, \color{fzjyellow}{Space Solver}) $\longrightarrow$ \textcolor{fzjyellow}{new Integrator}
 
 \end{frame}
 
@@ -168,10 +178,9 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
   \begin{column}{3cm}
         What is needed? 
 	\begin{itemize}
-	  \item \textcolor{fzjyellow}{Quadrature}
-	  \item \textcolor{fzjyellow}{Evaluation of $F$}
-	  \item \textcolor{fzjyellow}{Interpolation}
-	  \item \textcolor{fzjyellow}{Restriction}
+	  \item same as SDC
+	  \item \textcolor{fzjyellow}{Interpolation} (space and time)
+	  \item \textcolor{fzjyellow}{Restriction} (space and time)
 	\end{itemize}
   \end{column}
   \begin{column}{7cm}
@@ -233,7 +242,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
@@ -259,7 +268,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
@@ -291,7 +300,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
       \color{fzjgray30}%
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
@@ -322,7 +331,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
       \color{fzjblue50}%
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
@@ -356,7 +365,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \color{fzjgray30}%
@@ -390,7 +399,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
@@ -427,7 +436,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \color{fzjblue50}%
@@ -461,7 +470,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
+      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
@@ -546,18 +555,16 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
   \frametitle{Implementation of SDC and MLSDC}
   \framesubtitle{Python Script for a SDC run with 3 Gauss-Lobatto nodes}
   \begin{lstlisting}[language=Python]
-problem = LambdaU(lmbda=complex(-1.0, 1.0))
+problem = LambdaU(complex(-1.0, 1.0))
 
 comm = ForwardSendingMessaging()
-solver = ParallelSdc(communicator=comm)
+solver = Sdc(communicator=comm)
 
-comm.link_solvers(previous=comm, next=comm)
-comm.write_buffer(value=problem.initial_value,
-                  time_point=problem.time_start)
+quadr = QuadratureBase(nodes=GaussLobatto(3), weight=Polynomial(1))
 
-solver.init(problem=problem, num_nodes=3)
+solver.init(quadr, problem)
 
-solution = solver.run(SemiImplicitSdcCore)
+solution = solver.run(integrator=SemiImplicitSdc)
   \end{lstlisting}
 \end{frame}
 
