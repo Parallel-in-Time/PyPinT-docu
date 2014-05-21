@@ -22,12 +22,24 @@
 
 \usepackage{listings}  % for source code display
 
+\lstset{
+%   language=zsh,
+  basicstyle=\scriptsize\ttfamily,
+  commentstyle=\color{fzjgray80},
+  keywordstyle=[1]\color{fzjgreen},
+  keywordstyle=[2]\color{fzjblue},
+  stringstyle=\color{fzjred},
+  inputencoding=utf8,
+  showspaces=false,
+  showstringspaces=false
+}
+
 \usepackage{hyperref}
 
 \title{PyPinT}
 \subtitle{Towards a framework for rapid prototyping of iterative parallel-in-time algorithms}
 \author{Torbjörn Klatt, Dieter Moser, Robert Speck}
-\institute{3rd Workshop on Parallel-in-Time Integration Methods}
+\institute{3rd Workshop on Parallel-in-Time Integration}
 \date{May 28, 2014}
 \setbeamertemplate{slide counter}[showall]
 
@@ -38,7 +50,7 @@
 \begin{frame}
   \frametitle{Overview}
   \begin{enumerate}
-    \item Recap of existing Parallel-in-Time Algorithms\\[2em]
+    \item Recap of existing Parallel-in-Time Approaches\\[2em]
     \item The \emph{PyPinT} Framework Explained\\[2em]
     \item Goals of \emph{PyPinT}\\[2em]
     \item Proof of Concept
@@ -176,15 +188,15 @@
 \begin{frame}
   \frametitle{Basic Concept}
   \begin{itemize}
-    \item \emph{Python} {\color{fzjgray50}\scriptsize $\geq$3.2} as language of choice\\
+    \item \emph{Python} {\color{fzjgray80}\scriptsize $\geq$3.2} as language of choice\\
       {\scriptsize for ease of use and extensibility (cf. \emph{NumPy}, \emph{SciPy})}
-    \item well-conceived and intuitive abstract interfaces\\
-      {\scriptsize for reusable code ensuring DRY principle}
     \item modular building blocks\\
       {\scriptsize for fast exchange of algorithms' building blocks}
+    \item well-conceived and intuitive abstract interfaces\\
+      {\scriptsize for reusable code ensuring DRY principle}
     \item integrated analyzation tools\\
       {\scriptsize for introspection and plotting (cf. \emph{matplotlib})}
-    \item usage of a sophisticated testing framework\\
+    \item usage of a sophisticated unit-testing framework\\
       {\scriptsize nobody writes bug-free code}
   \end{itemize}
   
@@ -309,7 +321,8 @@
         \item providers of various quadrature nodes and weight functions\\
           {\scriptsize e.g. Gauss-Lobatto, Gauss-Legendre, polynomial, etc.\\}
         \item providers aggregated in integrators\\
-          {\scriptsize for intuitive \texttt{.integrate(data, from\_node=0, to\_node='last')} method\\}
+          {\scriptsize for intuitive methods:\\
+           \texttt{.q\_matrix.apply(data)} and \texttt{.s\_matrix.apply(data, target\_node)} \\}
       \end{itemize}
       
       \begin{picture}(1,1)
@@ -379,7 +392,7 @@
         \item containers for multiple levels\\
           {\scriptsize providing access to integrators of each level\\}
         \item unified generic interface for transitions between levels\\
-          {\scriptsize via methods \texttt{.restringate(data, fine\_id, coarse\_id)} and\\[-0.5em]
+          {\scriptsize via methods \texttt{.restrict(data, fine\_id, coarse\_id)} and\\[-0.5em]
            \texttt{.prolongate(data, coarse\_id, fine\_id)}}
       \end{itemize}
       
@@ -466,14 +479,14 @@
   \frametitle{Goals for PyPinT}
   
   \begin{itemize}
-    \item<1-> providing generic framework for PINT algorithms\\
+    \item<1-> providing generic framework for many PinT algorithms\\
       {\onslide<2->\color{fzjblue50}$\Rightarrow$ easy comparability of different algorithms' building blocks\\[1.5em]}
     \item<3-> intuitive user-expandability through well-defined interfaces\\
       {\onslide<4->\color{fzjblue50}$\Rightarrow$ fast exchangability and prototyping of different building blocks\\[1.5em]}
-    \item<5-> well-tested and well-documented implementations of PINT algorithms\\
+    \item<5-> well-tested and well-documented implementations of PinT algorithms\\
       {\onslide<6->\color{fzjblue50}$\Rightarrow$ suited for educational use\\[1.5em]}
     \item<7-> open-source hosted on \includegraphics[height=1em]{src/GitHub-Mark-32px.png}~GitHub\\
-      {\onslide<8->\color{fzjblue50}$\Rightarrow$ reaching young \& rising developers and scientists promoting PINT algorithms\\[1.5em]}
+      {\onslide<8->\color{fzjblue50}$\Rightarrow$ reaching young \& rising developers and scientists promoting PinT algorithms\\[1.5em]}
   \end{itemize}
 \end{frame}
 
@@ -484,33 +497,55 @@
 
 \begin{frame}
   \frametitle{Implementation of SDC and MLSDC}
-  \framesubtitle{\normalfont Convergence Regions {\tiny\color{fzjgray50}(number iterations)} of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1], \lambda\in\mathrm{C}$}
+  \framesubtitle{\normalfont Convergence Regions {\tiny\color{fzjgray50}(number iterations for residual $\leq10^{-14}$)} of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1], \lambda\in\mathbb{C}$}
+  \begin{center}
+    \vspace{-1em}
+    {\color{fzjblue50}SDC}
+  \end{center}
   \begin{columns}[T]
-    \begin{column}{7cm}
-      \vspace{-7.75em}
-      \centering
-      {\color{fzjblue50}SDC}
+    \begin{column}{4cm}
       \begin{picture}(1,1)
-        \put(-70,-88){\includegraphics[height=3cm]{src/sdc_n5.png}}
-        \put(-40,-90){\tiny $5$ Gauss-Lobatto nodes}
-        \put(-70,-185){\includegraphics[height=3cm]{src/sdc_n7.png}}
-        \put(-40,-190){\tiny $7$ Gauss-Lobatto nodes}
+        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n3.png}}
+        \put(25,-80){\tiny $3$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
-    \begin{column}{7cm}
-      \vspace{-7.75em}
-      \centering
-      {\color{fzjblue50}MLSDC}
+    \begin{column}{4cm}
       \begin{picture}(1,1)
-        \put(-80,-88){\includegraphics[height=3cm]{src/mlsdc_n03_n15.png}}
-        \put(-50,-50){\color{red}\textbf{BROKEN}}
-        \put(-75,-90){\tiny two levels with $3$ and $5$ Gauss-Lobatto nodes}
-        \put(-80,-185){\includegraphics[height=3cm]{src/mlsdc_n04_n17.png}}
-        \put(-50,-150){\color{red}\textbf{BROKEN}}
-        \put(-75,-190){\tiny two levels with $4$ and $7$ Gauss-Lobatto nodes}
+        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n5.png}}
+        \put(25,-80){\tiny $5$ Gauss-Lobatto nodes}
+      \end{picture}
+    \end{column}
+    \begin{column}{4cm}
+      \begin{picture}(1,1)
+        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n7.png}}
+        \put(25,-80){\tiny $7$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
   \end{columns}
+  \vspace{8em}
+  \begin{center}
+    {\color{fzjblue50}MLSDC}\\[0.5em]
+    ~\includegraphics[height=1cm]{src/bug_blank_wikimedia.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Implementation of SDC and MLSDC}
+  \framesubtitle{Python Script for a SDC run with 3 Gauss-Lobatto nodes}
+  \begin{lstlisting}[language=Python]
+problem = LambdaU(lmbda=complex(-1.0, 1.0))
+
+comm = ForwardSendingMessaging()
+solver = ParallelSdc(communicator=comm)
+
+comm.link_solvers(previous=comm, next=comm)
+comm.write_buffer(value=problem.initial_value,
+                  time_point=problem.time_start)
+
+solver.init(problem=problem, num_nodes=3)
+
+solution = solver.run(SemiImplicitSdcCore)
+  \end{lstlisting}
 \end{frame}
 
 
