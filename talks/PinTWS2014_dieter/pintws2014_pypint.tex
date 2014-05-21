@@ -55,7 +55,7 @@
 
 \begin{frame}
   \frametitle{Parareal}
-  \framesubtitle{\scriptsize\normalfont Reference}
+  \framesubtitle{\scriptsize\normalfont  Y. Maday, “The parareal in time algorithm,” pp. 1–24, 2008.}
   \begin{columns}[T]
     \begin{column}{4cm}
       \begin{itemize}
@@ -75,12 +75,15 @@
               \begin{align*}
                   \textcolor{orange}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
               \end{align*}
+    What is needed?\textcolor{fzjyellow}{Two Integrator},  \textcolor{fzjyellow}{Evaluation of $F$}
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{Integral Deferred Corrections}
-  \framesubtitle{Reference}
+  \frametitle{Deferred Corrections \hspace{2em} \onslide<2>{ and \hspace{2em}  Integral Deferred Corrections}}
+
+ \framesubtitle{\scriptsize\normalfont  \alt<1>{ V. Pereyra, “On improving an approximate solution of a functional equation by deferred corrections,” Numer. Math., vol. 391, no. 044, pp. 376–391, 1966.}
+  					{ A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}}
   \begin{columns}[T]
     \begin{column}{7cm}
       $ y'(t) = f\left( t, y\left( t \right) \right),\quad y\left( 0 \right)= y_{0} $\\[1.5em]
@@ -100,7 +103,9 @@
     
 
     \end{column}
-    \begin{column}{7cm} 
+    \begin{column}{7cm}
+
+      \onslide<2>{
       $   y(t) = y_0 + \int_{0}^{t}  f\left( \tau, y\left( \tau \right) \right) \mathrm{d}\tau, \quad y\left( 0 \right)= y_{0} $ \\[1.5em]
       Using the residual\\[1em]
       $r(t) = y_{0} - \tilde y\left( t \right) + \int_{0}^{t} f\left(\tau, y\left( \tau \right) \right)  \mathrm{d}\tau $\\[1em]
@@ -112,7 +117,7 @@
     \begin{align*}
       \tilde y_{j+1} = \tilde y_{j} + e_{j}
     \end{align*}
-
+	}
 
   \end{column}
 \end{columns}
@@ -121,31 +126,39 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Revisionist IDC }
-  \framesubtitle{Reference}
-\center One equation
+  \frametitle{ Spectral Deferred Corrections }
+  \framesubtitle{\scriptsize\normalfont A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}
+  \begin{center}
+ \includegraphics[width=6cm]{src/sdc_time_domain} 
+  \end{center}
+
+One sweep is performed by
 \begin{align*}
   u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) 
 \end{align*}
-\center different strategies of computation\\[1.5em]
-\includegraphics[width=12cm]{src/ridc_time_domain}\\
-    What is needed? \textcolor{fzjyellow}{Integrator},  \textcolor{fzjyellow}{Evaluation of $F$}
+new main constituent is the quadrature operator
+\begin{align*}
+  \mathcal{I}_{n}^{n+1} \mathbf{y} = \sum_{i=1}^{m} \omega_{i} \tilde y_i \approx \int_{t_n}^{t_{n+1}} y\left( \tau \right) \mathrm{d} \tau
+\end{align*}
+
+What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evaluation of $F$}
 
 \end{frame}
 
 \begin{frame}
   \frametitle{Multilevel SDC}
-  \framesubtitle{Reference}
-\center One equation
+  \framesubtitle{\scriptsize\normalfont R. Speck, D. Ruprecht, and M. Emmett, “A multi-level spectral deferred correction method,” arXiv Prepr. arXiv …, 2013.}
+\center Slightly different sweep
 \begin{align*}
   u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) + \textcolor{fzjblue30}{\tau_{n}^{k}}
 \end{align*}
-\center different strategies of computation\\[1.5em]
+\center and multiple level, correction $\textcolor{fzjblue30}{\tau_{n}^{k}}$ stems from informations on different level
+\\[1.5em]
 \begin{columns}[T]
   \begin{column}{3cm}
         What is needed? 
 	\begin{itemize}
-	  \item \textcolor{fzjyellow}{Integrator}
+	  \item \textcolor{fzjyellow}{Quadrature}
 	  \item \textcolor{fzjyellow}{Evaluation of $F$}
 	  \item \textcolor{fzjyellow}{Interpolation}
 	  \item \textcolor{fzjyellow}{Restriction}
