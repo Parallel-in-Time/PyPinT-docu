@@ -22,14 +22,24 @@
 
 \usepackage{listings}  % for source code display
 
+\lstset{
+%   language=zsh,
+  basicstyle=\scriptsize\ttfamily,
+  commentstyle=\color{fzjgray80},
+  keywordstyle=[1]\color{fzjgreen},
+  keywordstyle=[2]\color{fzjblue},
+  stringstyle=\color{fzjred},
+  inputencoding=utf8,
+  showspaces=false,
+  showstringspaces=false
+}
+
 \usepackage{hyperref}
 
 \title{PyPinT}
 \subtitle{Towards a framework for rapid prototyping of iterative parallel-in-time algorithms}
-\author{Dieter Moser, Torbjörn Klatt, Dr. Robert Speck
-  <\href{mailto:d.moser@fz-juelich.de}{\{d.moser,t.klatt,r.speck\}@fz-juelich.de}>%
-}
-\institute{3rd Workshop on Parallel-in-Time Integration Methods}
+\author{Torbjörn Klatt, Dieter Moser, Robert Speck}
+\institute{3rd Workshop on Parallel-in-Time Integration}
 \date{May 28, 2014}
 \setbeamertemplate{slide counter}[showall]
 
@@ -40,10 +50,10 @@
 \begin{frame}
   \frametitle{Overview}
   \begin{enumerate}
-    \item Recap of existing Parallel-in-Time Algorithms
-    \item The \emph{PyPinT} Framework Explained
-    \item Goals
-    \item Proof of Concept --- Examples Analyzed
+    \item Recap of existing Parallel-in-Time Approaches\\[2em]
+    \item The \emph{PyPinT} Framework Explained\\[2em]
+    \item Goals of \emph{PyPinT}\\[2em]
+    \item Proof of Concept
   \end{enumerate}
 \end{frame}
 
@@ -73,7 +83,7 @@
   \end{column}
 \end{columns}
               \begin{align*}
-                  \textcolor{orange}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
+                  \textcolor{fzjyellow}{y_{m+1}^{k+1}} = \textcolor{red}{\mathcal{F}(y_m^k)} + \textcolor{blue}{\mathcal{G}(y_m^{k+1})} - \textcolor{blue}{\mathcal{G}(y_m^k)}
               \end{align*}
     What is needed? \textcolor{fzjyellow}{Two Integrators},  \textcolor{fzjyellow}{Evaluation of $F$}
 
@@ -191,15 +201,15 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
 \begin{frame}
   \frametitle{Basic Concept}
   \begin{itemize}
-    \item \emph{Python} {\color{fzjgray50}\scriptsize $\geq$3.2} as language of choice\\
+    \item \emph{Python} {\color{fzjgray80}\scriptsize $\geq$3.2} as language of choice\\
       {\scriptsize for ease of use and extensibility (cf. \emph{NumPy}, \emph{SciPy})}
-    \item well-conceived and intuitive abstract interfaces\\
-      {\scriptsize for reusable code ensuring DRY principle}
     \item modular building blocks\\
       {\scriptsize for fast exchange of algorithms' building blocks}
+    \item well-conceived and intuitive abstract interfaces\\
+      {\scriptsize for reusable code ensuring DRY principle}
     \item integrated analyzation tools\\
       {\scriptsize for introspection and plotting (cf. \emph{matplotlib})}
-    \item usage of a sophisticated testing framework\\
+    \item usage of a sophisticated unit-testing framework\\
       {\scriptsize nobody writes bug-free code}
   \end{itemize}
   
@@ -207,7 +217,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
     \put(260,150){\includegraphics[height=1.25cm]{src/python_logo.png}}
     \put(290,135){\includegraphics[height=0.75cm]{src/numpy_logo.png}}
     \put(325,135){\includegraphics[height=0.75cm]{src/scipy_logo.png}}
-    \put(290,80){\includegraphics[height=1.1cm]{src/puzzle.png}}
+    \put(290,70){\includegraphics[height=1.1cm,angle=50]{src/puzzle_no_text.pdf}}
     \put(255,50){\includegraphics[height=0.75cm]{src/matplotlib_logo.png}}
   \end{picture}
 \end{frame}
@@ -231,7 +241,7 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
     \end{column}
     \begin{column}{10cm}      
       \begin{picture}(1,1)
-        \put(50,-110){\includegraphics[width=5cm]{src/puzzle.png}}
+        \put(15,-175){\includegraphics[width=6cm,angle=50]{src/puzzle_no_text.pdf}}
       \end{picture}
     \end{column}
   \end{columns}
@@ -324,7 +334,8 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
         \item providers of various quadrature nodes and weight functions\\
           {\scriptsize e.g. Gauss-Lobatto, Gauss-Legendre, polynomial, etc.\\}
         \item providers aggregated in integrators\\
-          {\scriptsize for intuitive \texttt{.integrate(data, from\_node=0, to\_node='last')} method\\}
+          {\scriptsize for intuitive methods:\\
+           \texttt{.q\_matrix.apply(data)} and \texttt{.s\_matrix.apply(data, target\_node)} \\}
       \end{itemize}
       
       \begin{picture}(1,1)
@@ -390,11 +401,11 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
     \begin{column}{10cm}
       \begin{itemize}
         \item abstract interface for generic level transitions\\
-          {\scriptsize e.g. \emph{full weighting}, \emph{injection}, \emph{Legendre-polynomial integration} etc.\\}
+          {\scriptsize e.g. \emph{full weighting}, \emph{injection}, \emph{Lagrange-polynomial integration} etc.\\}
         \item containers for multiple levels\\
           {\scriptsize providing access to integrators of each level\\}
         \item unified generic interface for transitions between levels\\
-          {\scriptsize via methods \texttt{.restringate(data, fine\_id, coarse\_id)} and\\[-0.5em]
+          {\scriptsize via methods \texttt{.restrict(data, fine\_id, coarse\_id)} and\\[-0.5em]
            \texttt{.prolongate(data, coarse\_id, fine\_id)}}
       \end{itemize}
       
@@ -481,14 +492,14 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
   \frametitle{Goals for PyPinT}
   
   \begin{itemize}
-    \item<1-> providing generic framework for PINT algorithms\\
+    \item<1-> providing generic framework for many PinT algorithms\\
       {\onslide<2->\color{fzjblue50}$\Rightarrow$ easy comparability of different algorithms' building blocks\\[1.5em]}
     \item<3-> intuitive user-expandability through well-defined interfaces\\
       {\onslide<4->\color{fzjblue50}$\Rightarrow$ fast exchangability and prototyping of different building blocks\\[1.5em]}
-    \item<5-> well-tested and well-documented implementations of PINT algorithms\\
+    \item<5-> well-tested and well-documented implementations of PinT algorithms\\
       {\onslide<6->\color{fzjblue50}$\Rightarrow$ suited for educational use\\[1.5em]}
     \item<7-> open-source hosted on \includegraphics[height=1em]{src/GitHub-Mark-32px.png}~GitHub\\
-      {\onslide<8->\color{fzjblue50}$\Rightarrow$ reaching young \& rising developers and scientists promoting PINT algorithms\\[1.5em]}
+      {\onslide<8->\color{fzjblue50}$\Rightarrow$ reaching young \& rising developers and scientists promoting PinT algorithms\\[1.5em]}
   \end{itemize}
 \end{frame}
 
@@ -499,31 +510,55 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
 
 \begin{frame}
   \frametitle{Implementation of SDC and MLSDC}
-  \framesubtitle{Stability Regions of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1]$}
+  \framesubtitle{\normalfont Convergence Regions {\tiny\color{fzjgray50}(number iterations for residual $\leq10^{-14}$)} of $u'(x,t)=\lambda u(x,t)$, $t\in[0,1], \lambda\in\mathbb{C}$}
+  \begin{center}
+    \vspace{-1em}
+    {\color{fzjblue50}SDC}
+  \end{center}
   \begin{columns}[T]
-    \begin{column}{7cm}
-      \vspace{-7.75em}
-      \centering
-      {\color{fzjblue50}SDC}
+    \begin{column}{4cm}
       \begin{picture}(1,1)
-%         \put(-50,-88){\includegraphics[height=3cm]{src/sdc_p3.png}}
-        \put(-35,-95){\tiny $3$ Gauss-Lobatto nodes}
-%         \put(-50,-188){\includegraphics[height=3cm]{src/sdc_p5.png}}
-        \put(-35,-195){\tiny $5$ Gauss-Lobatto nodes}
+        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n3.png}}
+        \put(25,-80){\tiny $3$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
-    \begin{column}{7cm}
-      \vspace{-7.75em}
-      \centering
-      {\color{fzjblue50}MLSDC}
+    \begin{column}{4cm}
       \begin{picture}(1,1)
-%         \put(-65,-88){\includegraphics[height=3cm]{src/mlsdc_p3.png}}
-        \put(-50,-95){\tiny $3$ Gauss-Lobatto nodes}
-%         \put(-65,-188){\includegraphics[height=3cm]{src/mlsdc_p5.png}}
-        \put(-50,-195){\tiny $5$ Gauss-Lobatto nodes}
+        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n5.png}}
+        \put(25,-80){\tiny $5$ Gauss-Lobatto nodes}
+      \end{picture}
+    \end{column}
+    \begin{column}{4cm}
+      \begin{picture}(1,1)
+        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n7.png}}
+        \put(25,-80){\tiny $7$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
   \end{columns}
+  \vspace{8em}
+  \begin{center}
+    {\color{fzjblue50}MLSDC}\\[0.5em]
+    ~\includegraphics[height=1cm]{src/bug_blank_wikimedia.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Implementation of SDC and MLSDC}
+  \framesubtitle{Python Script for a SDC run with 3 Gauss-Lobatto nodes}
+  \begin{lstlisting}[language=Python]
+problem = LambdaU(lmbda=complex(-1.0, 1.0))
+
+comm = ForwardSendingMessaging()
+solver = ParallelSdc(communicator=comm)
+
+comm.link_solvers(previous=comm, next=comm)
+comm.write_buffer(value=problem.initial_value,
+                  time_point=problem.time_start)
+
+solver.init(problem=problem, num_nodes=3)
+
+solution = solver.run(SemiImplicitSdcCore)
+  \end{lstlisting}
 \end{frame}
 
 
@@ -545,13 +580,6 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
       \begin{column}{0.09\textwidth}
       \end{column}
       \begin{column}{0.3\textwidth}
-        Dieter Moser\\
-        Juelich Supercomputing Centre\\
-        Building 16.3, Room 022\\
-        Tel: +49~2461~61~96453\\
-        eMail: \href{mailto:d.moser@fz-juelich.de}{d.moser@fz-juelich.de}
-      \end{column}
-      \begin{column}{0.3\textwidth}
         Torbjörn Klatt\\
         Juelich Supercomputing Centre\\
         Building 16.3, Room 022\\
@@ -559,7 +587,14 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
         eMail: \href{mailto:t.klatt@fz-juelich.de}{t.klatt@fz-juelich.de}
       \end{column}
       \begin{column}{0.3\textwidth}
-        Dr. Robert Speck~*\\
+        Dieter Moser\\
+        Juelich Supercomputing Centre\\
+        Building 16.3, Room 022\\
+        Tel: +49~2461~61~96453\\
+        eMail: \href{mailto:d.moser@fz-juelich.de}{d.moser@fz-juelich.de}
+      \end{column}
+      \begin{column}{0.3\textwidth}
+        Robert Speck~*\\
         Juelich Supercomputing Centre\\
         Building 16.3, Room 131\\
         Tel: +49~2461~61~1644\\
@@ -571,6 +606,9 @@ What is needed? \textcolor{fzjyellow}{Quadrature},  \textcolor{fzjyellow}{Evalua
   \end{center}
   \vfill
   {\tiny * corresponding author}
+  \begin{picture}(1,1)
+    \put(-85,200){\includegraphics[width=3cm]{src/pint_logo.png}}
+  \end{picture}
 \end{frame}
 
 \end{document}
