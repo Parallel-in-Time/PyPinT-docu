@@ -78,7 +78,10 @@
 
 \begin{frame}
   \frametitle{Parareal}
-  \framesubtitle{\scriptsize\normalfont Y. Maday, \emph{The parareal in time algorithm}, pp. 1–24, 2008.}
+  \framesubtitle{%
+    \normalfont\tiny%
+    Y. Maday. 2008. \emph{The Parareal in Time Algorithm}.%
+  }
   \begin{columns}[T]
     \begin{column}{4cm}
       \begin{itemize}
@@ -99,11 +102,11 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Deferred Corrections \hspace{2em} \onslide<2>{ and \hspace{2em}  Integral Deferred Corrections}}
+  \frametitle{Deferred Corrections \hspace{2em} \onslide<2>{ {\normalfont and} \hspace{2em}  Integral Deferred Corrections}}
   \framesubtitle{
-    \scriptsize\normalfont
-    \alt<1>{V. Pereyra, “On improving an approximate solution of a functional equation by deferred corrections,” Numer. Math., vol. 391, no. 044, pp. 376–391, 1966.}
-           {A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}%
+    \normalfont\tiny
+    \alt<1>{V. Pereyra. 1966. \emph{On Improving an Approximate Solution of a Functional Equation by Deferred Corrections}. Numerische Mathematik. 8(4) 376–391.}
+           {A. Dutt, L. Greengard, V. Rokhlin. 2000. \emph{Spectral Deferred Correction Methods for Ordinary Differential Equations}. BIT Numerical Mathematics 40(2) 241–266.}%
   }
   \begin{columns}[T]
     \begin{column}{7cm}
@@ -142,7 +145,9 @@
 \begin{frame}
   \frametitle{ Spectral Deferred Corrections }
   \framesubtitle{
-    \scriptsize\normalfont A. Dutt, L. Greengard, and V. Rokhlin, “Spectral deferred correction methods for ordinary differential equations,” BIT Numer. Math., vol. 40, no. 2, pp. 241–266, Jun. 2000.}
+    \normalfont\tiny%
+    A. Dutt, L. Greengard, V. Rokhlin. 2000. \emph{Spectral Deferred Correction Methods for Ordinary Differential Equations}. BIT Numerical Mathematics 40(2) 241–266.%
+  }
   \begin{center}
     \includegraphics[width=6cm]{src/sdc_time_domain} 
   \end{center}
@@ -161,7 +166,10 @@
 
 \begin{frame}
   \frametitle{Multilevel SDC}
-  \framesubtitle{\scriptsize\normalfont R. Speck, D. Ruprecht, and M. Emmett, “A multi-level spectral deferred correction method,” arXiv Prepr. arXiv …, 2013.}
+  \framesubtitle{%
+    \normalfont\tiny%
+    R. Speck, D. Ruprecht, M. Emmett, M. L. Minion, M. Bolten, R. Krause. 2013. \emph{A Multi-Level Spectral Deferred Correction Method}. arXiv Math Numerical Analysis.%
+  }
   \center Slightly different sweep
   \begin{align*}
     u_{n+1}^{k+1} = u_{n}^{k+1} + \Delta t \left[ F\left( u_{n+1}^{k+1} \right) - F\left(u_{n+1}^{k}  \right)) \right] +\mathcal{I}_{n}^{n+1}\left( F\left( \mathbf{u}^{k} \right) \right) + \textcolor{fzjblue30}{\tau_{n}^{k}}
@@ -232,10 +240,9 @@
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -259,10 +266,9 @@
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -292,10 +298,9 @@
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
       \color{fzjgray30}%
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -324,11 +329,10 @@
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
       \color{fzjblue50}%
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -358,12 +362,11 @@
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -393,12 +396,11 @@
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
       \color{fzjgray30}%
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
     \end{column}
@@ -431,46 +433,9 @@
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \color{fzjblue50}%
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
-      \color{fzjgray30}%
-      \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
-      \hspace{0.75em}\texttt{\textasciitilde.plugins}
-    \end{column}
-    \begin{column}{10cm}
-      \begin{itemize}
-        \item providers of various quadrature nodes and weight functions\\
-          {\scriptsize e.g. Gauss-Lobatto, Gauss-Legendre, polynomial, etc.\\}
-        \item providers aggregated in basic quadrature interface\\
-          {\scriptsize for intuitive methods:\\
-           \texttt{.q\_matrix.apply(data)} and \texttt{.s\_matrix.apply(data, target\_node)} \\}
-      \end{itemize}
-      
-      \begin{picture}(1,1)
-        \put(25,-100){\includegraphics[height=3.75cm]{src/quadrature_interfaces.pdf}}
-      \end{picture}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Modules}
-  \framesubtitle{Abstract Modelling of PinT Algorithms}
-  \vspace{-5em}
-  \begin{columns}[T]
-    \begin{column}{5cm}
-      \color{fzjblue50}%
-      \texttt{pypint}\\
-      \color{fzjgray30}%
-      \hspace{0.75em}\texttt{\textasciitilde.problems}\\
-      \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
-      \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
-      \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \color{fzjgray30}%
@@ -502,10 +467,9 @@
       \color{fzjgray30}%
       \hspace{0.75em}\texttt{\textasciitilde.problems}\\
       \hspace{0.75em}\texttt{\textasciitilde.solvers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.integratos}\\
+      \hspace{0.75em}\texttt{\textasciitilde.integrators}\\
       \hspace{0.75em}\texttt{\textasciitilde.communicators}\\
       \hspace{0.75em}\texttt{\textasciitilde.multi\_level\_providers}\\
-      \hspace{0.75em}\texttt{\textasciitilde.quadrature}\\
       \hspace{0.75em}\texttt{\textasciitilde.solutions}\\
       \color{fzjblue50}%
       \hspace{0.75em}\texttt{\textasciitilde.plugins}
@@ -579,8 +543,18 @@
   \end{columns}
   \vspace{8em}
   \begin{center}
-    {\color{fzjblue50}MLSDC}\\[0.5em]
-    ~\includegraphics[height=1cm]{src/bug_blank_wikimedia.pdf}
+    {\color{fzjblue50}MLSDC}\\[2em]
+    \begin{picture}(1,1)
+      \put(-155,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(-115,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(-75,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(-45,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(-15,0){\includegraphics[height=1cm]{src/bug_blank_wikimedia.pdf}}
+      \put(30,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(65,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(105,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+      \put(155,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}}
+    \end{picture}
   \end{center}
 \end{frame}
 
@@ -606,12 +580,17 @@ solution = solver.run(integrator=integr)
   \framesubtitle{\normalfont``towards'' \dots}
   
   \begin{itemize}
+    \item playground for rapid prototyping of PinT algorithms
+      \begin{itemize}\scriptsize
+        \item no need to implement e.g. matrix inversion or quadrature on your own\\
+          {\color{fzjgray50}\scriptsize $\Rightarrow$ saves your precious time}\\[1em]
+      \end{itemize}
     \item use of Python's full feature set
-      \begin{itemize}
+      \begin{itemize}\scriptsize
         \item easy parallelism\\
-          {\scriptsize via Python's own (e.g. \texttt{multiprocessing}) or 3rd-party modules (e.g. \texttt{mpi4py})}
-	\item built-in portability\\
-	  {\scriptsize runs on Unix and MacOS (should run on Windows too)}
+          {\color{fzjgray80} via Python's own (e.g. \texttt{multiprocessing}) or 3rd-party modules (e.g. \texttt{mpi4py})}\\[.75em]
+        \item built-in portability\\
+          {\color{fzjgray80} runs on Unix and MacOS (should run on Windows too)}
       \end{itemize}
   \end{itemize}
 \end{frame}
