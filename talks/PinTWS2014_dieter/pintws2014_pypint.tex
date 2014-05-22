@@ -524,20 +524,20 @@
   \begin{columns}[T]
     \begin{column}{4cm}
       \begin{picture}(1,1)
-        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n3.png}}
-        \put(25,-80){\tiny $3$ Gauss-Lobatto nodes}
+        \put(-13,-85){\includegraphics[height=3.5cm]{src/sdc_n3.png}}
+        \put(28,-90){\tiny $3$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
     \begin{column}{4cm}
       \begin{picture}(1,1)
-        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n5.png}}
-        \put(25,-80){\tiny $5$ Gauss-Lobatto nodes}
+        \put(-13,-85){\includegraphics[height=3.5cm]{src/sdc_n5.png}}
+        \put(28,-90){\tiny $5$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
     \begin{column}{4cm}
       \begin{picture}(1,1)
-        \put(0,-75){\includegraphics[height=3cm]{src/sdc_n7.png}}
-        \put(25,-80){\tiny $7$ Gauss-Lobatto nodes}
+        \put(-13,-85){\includegraphics[height=3.5cm]{src/sdc_n7.png}}
+        \put(28,-90){\tiny $7$ Gauss-Lobatto nodes}
       \end{picture}
     \end{column}
   \end{columns}
@@ -590,7 +590,12 @@ solution = solver.run(integrator=integr)
         \item easy parallelism\\
           {\color{fzjgray80} via Python's own (e.g. \texttt{multiprocessing}) or 3rd-party modules (e.g. \texttt{mpi4py})}\\[.75em]
         \item built-in portability\\
-          {\color{fzjgray80} runs on Unix and MacOS (should run on Windows too)}
+          {\color{fzjgray80} runs on Unix and MacOS (should run on Windows too)}\\[0.75em]
+        \item interactive computing\\
+          {\color{fzjgray80} integrates well with IPython}
+          \begin{picture}(1,1)
+            \put(170,0){\includegraphics[width=3.5cm]{src/ipython_logo.png}}
+          \end{picture}
       \end{itemize}
   \end{itemize}
 \end{frame}
