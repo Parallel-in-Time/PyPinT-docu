@@ -651,4 +651,25 @@ solution = solver.run(integrator=integr)
   \end{picture}
 \end{frame}
 
+\begin{frame}
+  \frametitle{The Aviles-Giga Problem}
+  An example from \emph{real} life
+\begin{align*}
+  u_t = \frac{1}{\varepsilon} \underbrace{\nabla \cdot \left( \left( \lvert \nabla u \rvert^2 - 1 \right)\nabla u \right)}_{\mathcal{N}} 
+  - \varepsilon \underbrace{\nabla^4 u}_{\mathcal{L}}
+\end{align*}
+\pause
+\begin{itemize}
+  \item very stiff linear part $\mathcal{L}$
+  \item highly nonlinear part $\mathcal{N}$
+  \item computed on a periodic domain $\mathbb{T} = \left( 0, 2 \pi \right)^2$
+\end{itemize}
+\vspace{1.5em} 
+\pause
+But what is it good for?\\[1.5em]
+\pause
+It is a simple model for Pattern Forming Mechanisms in magnetic bulk
+
+\end{frame}
+
 \end{document}
