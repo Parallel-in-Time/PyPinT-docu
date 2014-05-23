@@ -40,7 +40,7 @@ order=-1
 
 [item:pintws2014_pypint.tex]
 archive=true
-column=15
+column=17
 encoding=UTF-8
 highlight=LaTeX
 line=539
@@ -49,7 +49,7 @@ open=true
 order=0
 
 [view-settings,view=0,item:pintws2014_pypint.tex]
-CursorColumn=15
+CursorColumn=17
 CursorLine=539
 JumpList=
-ViMarks=.,539,14,[,539,14,],539,14
+ViMarks=.,537,26,[,538,0,],538,49
