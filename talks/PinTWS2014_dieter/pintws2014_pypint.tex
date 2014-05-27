@@ -584,15 +584,14 @@ solution = solver.run(integrator=integr)
   \framesubtitle{An example from \emph{real} life \dots}
   \begin{align*}
     u_t = \frac{1}{\varepsilon} \underbrace{\nabla \cdot \left( \left( \lvert \nabla u \rvert^2 - 1 \right)\nabla u \right)}_{\mathcal{N}} 
-    - \varepsilon \underbrace{\nabla^4 u}_{\mathcal{L}}
+    - \varepsilon \nabla^4 u
   \end{align*}
   \pause
   \begin{itemize}
-    \item very stiff linear part $\mathcal{L}$
     \item highly nonlinear part $\mathcal{N}$
     \item computed on a periodic domain $\mathbb{T} = \left( 0, 2 \pi \right)^2$
   \end{itemize}
-  \vspace{1.5em} 
+  \vspace{1em} 
   \pause
   But what is it good for?\\[1.5em]
   \pause
