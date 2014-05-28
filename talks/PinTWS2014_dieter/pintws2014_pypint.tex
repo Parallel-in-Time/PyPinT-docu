@@ -50,7 +50,7 @@
 \usepackage{hyperref}
 
 \title{PyPinT}
-\subtitle{Towards a framework for rapid prototyping of iterative parallel-in-time algorithms}
+\subtitle{Towards a framework for rapid prototyping\\of iterative parallel-in-time algorithms}
 \author{Torbjörn Klatt, Dieter Moser, Robert Speck}
 \institute{3rd Workshop on Parallel-in-Time Integration}
 \date{May 28, 2014}
@@ -503,13 +503,13 @@
   
   \begin{itemize}
     \item<1-> providing generic framework for many PinT algorithms\\
-      {\onslide<2->\color{fzjblue50}$\Rightarrow$ easy comparability of different algorithms' building blocks\\[1.5em]}
-    \item<3-> intuitive user-expandability through well-defined interfaces\\
-      {\onslide<4->\color{fzjblue50}$\Rightarrow$ fast exchangability and prototyping of different building blocks\\[1.5em]}
-    \item<5-> well-tested and well-documented implementations of PinT algorithms\\
-      {\onslide<6->\color{fzjblue50}$\Rightarrow$ suited for educational use\\[1.5em]}
-    \item<7-> open-source hosted on \includegraphics[height=1em]{src/GitHub-Mark-32px.png}~GitHub\\
-      {\onslide<8->\color{fzjblue50}$\Rightarrow$ reaching young \& rising developers and scientists promoting PinT algorithms\\[1.5em]}
+      {\color{fzjblue50}$\Rightarrow$ easy comparability of different algorithms' building blocks\\[1.5em]}
+    \item<2-> intuitive user-expandability through well-defined interfaces\\
+      {\color{fzjblue50}$\Rightarrow$ fast exchangability and prototyping of different building blocks\\[1.5em]}
+    \item<3-> well-tested and well-documented implementations of PinT algorithms\\
+      {\color{fzjblue50}$\Rightarrow$ suited for educational use\\[1.5em]}
+    \item<4-> open-source hosted on \includegraphics[height=1em]{src/GitHub-Mark-32px.png}~GitHub\\
+      {\color{fzjblue50}$\Rightarrow$ reaching young \& rising developers and scientists promoting PinT algorithms\\[1.5em]}
   \end{itemize}
 \end{frame}
 
@@ -547,17 +547,19 @@
   \end{columns}
   \vspace{8em}
   \begin{center}
-    {\color{fzjblue50}MLSDC}\\[2em]
+    \alt<2->{
+      {\color{fzjblue50}MLSDC}\\[2em]
+    }{{~}\\[2em]}
     \begin{picture}(1,1)
-      \put(-155,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
-      \put(-115,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
-      \put(-75,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
-      \put(-45,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
-      \put(-15,0){\includegraphics[height=1cm]{src/bug_blank_wikimedia.pdf}<2->}
-      \put(30,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<3->}
-      \put(65,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
-      \put(105,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
-      \put(155,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
+      \put(-155,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
+      \put(-115,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
+      \put(-75,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
+      \put(-45,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
+      \put(-15,0){\includegraphics[height=1cm]{src/bug_blank_wikimedia.pdf}<3->}
+      \put(30,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<4->}
+      \put(65,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
+      \put(105,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
+      \put(155,0){\includegraphics[height=0.5cm]{src/bug_blank_wikimedia.pdf}<5->}
     \end{picture}
   \end{center}
 \end{frame}
@@ -586,7 +588,6 @@ solution = solver.run(integrator=integr)
     u_t = \frac{1}{\varepsilon} \underbrace{\nabla \cdot \left( \left( \lvert \nabla u \rvert^2 - 1 \right)\nabla u \right)}_{\mathcal{N}} 
     - \varepsilon \nabla^4 u
   \end{align*}
-  \pause
   \begin{itemize}
     \item highly nonlinear part $\mathcal{N}$
     \item computed on a periodic domain $\mathbb{T} = \left( 0, 2 \pi \right)^2$
